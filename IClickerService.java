@@ -2,16 +2,19 @@
 public class IClickerService {
 
 	private int numberOfAnswers, a, b, c, d, right, wrong, type, sumOfVotes;
-	private String answer, answer2;
+	private Question question;
 	
-	public IClickerService(int type) {
-		this.type = type;
+	/*We accept a question to identify how many answers there will be.*/
+	public IClickerService(Question question) {
+		this.question = question;
+		this.type = question.getType();
 		
 		if(type == 2)
 			setNumberOfAnswers(2);
 		else
 			setNumberOfAnswers(1);
 	}
+	
 	public void submitAnswer(int answer)
 	{
 		if(type == 0)
@@ -45,14 +48,6 @@ public class IClickerService {
 			d++;
 	}
 
-	public void setAnswer(String string) {
-		answer = string;
-	}
-
-	public void setAnswers(String string, String string2) {
-		answer = string;
-		answer2 = string2;
-	}
 	public void setNumberOfAnswers(int num)
 	{
 		numberOfAnswers = num;
@@ -61,6 +56,8 @@ public class IClickerService {
 	{
 		return numberOfAnswers;
 	}
+	
+	/*Sum up votes to display final tally*/
 	public void sum()
 	{
 		sumOfVotes = a + b + c + d + right + wrong;
@@ -71,6 +68,7 @@ public class IClickerService {
 			return sumOfVotes;
 		return 0;
 	}
+	/*Results are displayed depending on question type and number of answers.*/
 	public void displayResults()
 	{
 		sum();
@@ -80,9 +78,9 @@ public class IClickerService {
 			System.out.println("\nYou voted and " + getSum() + " votes were cast...\nA: " + a + "\nB: " + b + "\nC: " + c + "\nD: " + d);
 		
 		if(numberOfAnswers == 1)
-			System.out.println("Correct answer: " + answer);
+			System.out.println("Correct answer: " + question.getAnswer());
 		else
-			System.out.println("Correct answers: " + answer + " and " + answer2);
+			System.out.println("Correct answers: " + question.getAnswer() + " and " + question.getAnswer2());
 		
 		
 		

@@ -21,7 +21,6 @@ public class Student {
 	}
 	public void setAnswer(int answer)
 	{
-		service.submitAnswer(answer);
 		this.answer = answer + "";
 	}
 	public String getAnswer()
@@ -31,13 +30,19 @@ public class Student {
 	public void setAnswer2(int answer)
 	{
 		if(!getAnswer().equalsIgnoreCase(answer+""))
-		{
-			service.submitAnswer2(answer);
 			this.answer2 = answer + "";
-		}
 	}
 	public String getAnswer2()
 	{
 		return answer2;
+	}
+	public void submitAnswer(int answer)
+	{
+		service.submitAnswer(answer);
+	}
+	public void submitAnswer2(int answer)
+	{
+		if(!getAnswer().equalsIgnoreCase(answer+""))
+			service.submitAnswer2(answer);
 	}
 }
